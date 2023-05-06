@@ -1,0 +1,64 @@
+.questionWindow ul {
+  display: flex;
+}
+.questionWindow li {
+  display: flex;
+  flex-direction: row;
+}
+.questionWindow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+}
+.question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+  font-size: 500%;
+  border-radius: 2rem;
+  background-color: white;
+  margin: 10% 0 0 0;
+}
+.answerWindow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.answers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 2rem;
+  color: black;
+  background: rgb(202, 198, 198);
+  border: 1px solid #9f9f9f;
+}
+
+.result {
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  padding: 10px;
+  button {
+    width: 300px;
+    height: 30px;
+    max-width: 300px;
+    border: none;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .answerWindow {
+    width: 400px;
+    flex-wrap: wrap;
+  }
+}
