@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from './Questions.module.scss'
+import End from '../../components/End'
 function Question(props) {
     const Array = [
         { "hiragana": "あ", "katakana": 'ア', value: "a" },
@@ -59,7 +60,7 @@ function Question(props) {
 
     const [wrongAnswer, setWrongAnswer] = useState(0);
     const [correctAnswer, setCorrectAnswer] = useState(0);
-    const [totalQ, setTotalQ] = useState(0)
+    const [totalQ, setTotalQ] = useState(1)
 
     console.log(props)
     let answerArray = [];
@@ -75,48 +76,45 @@ function Question(props) {
     console.log(currentHiragana.hiragana)
     console.log(currentHiragana[props.alp])
     answerArray.sort(() => Math.random() - 0.5);
-    if (totalQ >= props.total) {
-        return (
-            <div className={styles.result}>
-                <h1>Результат</h1>
-                <p>Всего вопросов: {totalQ}</p>
-                <p>Верно: {correctAnswer}</p>
-                <p>Ошибок: {wrongAnswer}</p>
+    if (totalQ > props.total) {
+        return <End totalQ={totalQ-1} correctAnswer={correctAnswer} alp={props.alphabet} f={props.f}/>
+    }
 
-                <button onClick={() => props.f(true)}>Вернуться</button>
-            </div>
-        )
+    const result = (obj) => {
+        currentHiragana.value === obj
+            ? (setHiraganaArr(
+                hiraganaArr.filter((item) => item.value !== obj)
+            ),
+                setCurrentHiragana(
+                    hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]
+                ),
+                setCorrectAnswer(correctAnswer + 1),
+                setTotalQ(totalQ + 1))
+            : (setWrongAnswer(wrongAnswer + 1),
+                setCurrentHiragana(
+                    hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]
+                ), setTotalQ(totalQ + 1))
     }
     return (
-            <div className={styles.questionWindow}>
-                <h2 className={styles.question}>{currentHiragana[props.alphabet]}</h2>
-                <p>{totalQ}</p>
+        <>
+            <div className={styles.container}>
+                <div className={styles.questionWindow}>
+                    <div className={styles.header}>
+                        <h2>{props.alphabet.toUpperCase()}</h2>
+                        <h3>{totalQ} of {props.total}</h3>
+                        <div className={styles.question}>{currentHiragana[props.alphabet.toLowerCase()]}</div>
+                    </div>
+                </div>
                 <ul className={styles.answerWindow}>
                     {answerArray.map((obj) => (
-                        <li
-                            key={obj}
-                            className={styles.answers}
-                            onClick={() =>
-                                currentHiragana.value === obj
-                                    ? (setHiraganaArr(
-                                        hiraganaArr.filter((item) => item.value !== obj)
-                                    ),
-                                        setCurrentHiragana(
-                                            hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]
-                                        ),
-                                        setCorrectAnswer(correctAnswer + 1),
-                                        setTotalQ(totalQ + 1))
-                                    : (setWrongAnswer(wrongAnswer + 1),
-                                        setCurrentHiragana(
-                                            hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]
-                                        ), setTotalQ(totalQ + 1))
-                            }
-                        >
+                        <li key={obj} className={styles.answers} onClick={() => result(obj)}>
                             {obj}
                         </li>
                     ))}
                 </ul>
+
             </div>
+        </>
     );
 }
 
