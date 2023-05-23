@@ -59,7 +59,9 @@
   width: 100%;
   text-align: center;
 }
-
+.active{
+  background-color: aqua;
+}
 @media screen and (max-width: 420.01px) {
   .settings{
     gap: 1rem;

@@ -1,8 +1,7 @@
 import styles from './Settings.module.scss'
 import { useState } from 'react'
 function Setting(props) {
-
-    const [amount, setA] = useState([
+    const [amount, setAmount] = useState([
         { name: 10, key: 1 },
         { name: 15, key: 2 },
         { name: 20, key: 3 },
@@ -14,6 +13,9 @@ function Setting(props) {
         { name: 'Katakana', value: 'Katakana', key: 2 },
         { name: 'Hiragana & Katakana(in dev)', value: 'Mix', key: 3 }
     ]);
+    const pick = (obj) => {
+        props.setApl(obj.value)
+    }
     return (
         <>
 
@@ -28,6 +30,7 @@ function Setting(props) {
                         <ul>
                             {amount.map((obj) => (
                                 <li
+                                style={props.totalQuestions === obj.name ? {boxShadow: '0px 0px 0px 3px #42413f'} : null}
                                     key={obj.key}
                                     onClick={() => (props.totalQ(obj.name))}>
                                     {obj.name}
@@ -40,19 +43,20 @@ function Setting(props) {
                         <ul className={styles.column}>
                             {type.map((obj) => (
                                 <li
+                                    style={props.apl === obj.value ? {boxShadow: '0px 0px 0px 3px #42413f'} : null}
                                     className={styles.settingsBackground}
                                     key={obj.key}
-                                    onClick={() => (props.setApl(obj.value))}>
-                                    {obj.name}
-                                </li>
+                                    onClick={() => pick(obj)}>
+                            {obj.name}
+                        </li>
                             ))}
-                        </ul>
-                    </div>
-                    <div className={styles.block}>
-                        <button onClick={() => props.opened(false)}>Try yourself</button>
-                    </div>
+                    </ul>
+                </div>
+                <div className={styles.block}>
+                    <button onClick={() => props.opened(false)}>Try yourself</button>
                 </div>
             </div>
+        </div >
         </>
     )
 

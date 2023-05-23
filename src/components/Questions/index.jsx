@@ -61,8 +61,6 @@ function Question(props) {
     const [wrongAnswer, setWrongAnswer] = useState(0);
     const [correctAnswer, setCorrectAnswer] = useState(0);
     const [totalQ, setTotalQ] = useState(1)
-
-    console.log(props)
     let answerArray = [];
     for (let i = 0; answerArray.length < 4; i++) {
         if (answerArray.indexOf(currentHiragana.value) === -1) {
@@ -73,8 +71,6 @@ function Question(props) {
         );
         answerArray = [...new Set(answerArray)];
     }
-    console.log(currentHiragana.hiragana)
-    console.log(currentHiragana[props.alp])
     answerArray.sort(() => Math.random() - 0.5);
     if (totalQ > props.total) {
         return <End totalQ={totalQ-1} correctAnswer={correctAnswer} alp={props.alphabet} f={props.f}/>

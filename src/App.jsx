@@ -11,7 +11,7 @@ function App() {
   return (
     <div className='container'>
       <div className="content">
-        {settingsOpened ? <Settings totalQ={setTotalQuestions} opened={setSettingsOpened} setApl={setCurrentAlphabet} /> : null}
+        {settingsOpened ? <Settings totalQ={setTotalQuestions} opened={setSettingsOpened} setApl={setCurrentAlphabet} apl={currentAlphabet} totalQuestions={totalQuestions} /> : null}
         {!settingsOpened ? <Question alphabet={currentAlphabet} total={totalQuestions} f={setSettingsOpened} /> : null}
       </div>
     </div>
