@@ -1,18 +1,16 @@
 .container{
-    height: 100%;
-    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
 .header{
     text-align: center;
-    margin:2rem;
+    margin:2вrem;
     font-size: 1.5rem;
 }
-
 .result{
     text-align: center;
     font-size: 4rem;
