@@ -5,14 +5,10 @@
 ul {
   list-style: none;
 }
-html {
-  height: 100vh;
-}
 body {
   font-family: "inter", sans-serif;
   background-color: #ead2ac;
   background-image: url("/bg.svg");
-  height: 100vh;
 }
 .container {
   display: flex;
@@ -21,7 +17,7 @@ body {
 }
 
 .content {
-  height: 100vh;
+  min-height: 100vh;
   width: 475px;
   border-radius: 1rem;
   background-color: #fff;

@@ -11,7 +11,7 @@ function Setting(props) {
     const [type, setItems] = useState([
         { name: 'Hiragana', value: 'Hiragana', key: 1 },
         { name: 'Katakana', value: 'Katakana', key: 2 },
-        { name: 'Hiragana & Katakana(in dev)', value: 'Mix', key: 3 }
+        { name: 'Hiragana & Katakana', value: 'Mix', key: 3 }
     ]);
     const pick = (obj) => {
         props.setApl(obj.value)

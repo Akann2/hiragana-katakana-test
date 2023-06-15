@@ -1,7 +1,11 @@
 import styles from './End.module.scss'
 
 function End(props) {
-
+    let arr = props.answers
+    console.log('2')
+    console.log(arr)
+    console.log('3')
+    console.log(arr[2].word)
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -14,7 +18,13 @@ function End(props) {
             </div>
             <div className={styles.details}>
                 <h1>Details</h1>
-                COMING SOON
+                <ul className={styles.answers}>
+                    {arr.map((obj) => (
+                        <li key={obj.indexOf} style={obj.check ? {backgroundColor: '#93DB8C'} : {backgroundColor: '#DB8C8C'}}>
+                            {obj.word}<span style={{fontSize:'0.7rem'}}>{arr.indexOf(obj)+1}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
             <div className={styles.button}>
                 <button onClick={() => props.f(true)}>End</button>

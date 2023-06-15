@@ -21,6 +21,34 @@
 .details{
     text-align: center;
 }
+.answers{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 1rem;
+   flex-wrap: wrap;
+   gap:15px;
+   background-color: #E2E2E2;
+   margin: 29px;
+   border-radius: 1rem;
+   box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
+
+   li{
+
+    font-weight: 500;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    height: 65px;
+    width: 65px;
+   }
+   span{
+    background-color: #0000001a;
+    border-radius: 0 0 1rem 1rem;
+   }
+}
+
 .bold{
     font-weight: bold;
 }

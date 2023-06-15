@@ -58,9 +58,11 @@ function Question(props) {
         hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]
     );
 
+    const [answers, setAnswers] = useState([]);
     const [wrongAnswer, setWrongAnswer] = useState(0);
     const [correctAnswer, setCorrectAnswer] = useState(0);
     const [totalQ, setTotalQ] = useState(1)
+
     let answerArray = [];
     for (let i = 0; answerArray.length < 4; i++) {
         if (answerArray.indexOf(currentHiragana.value) === -1) {
@@ -71,26 +73,45 @@ function Question(props) {
         );
         answerArray = [...new Set(answerArray)];
     }
+
     answerArray.sort(() => Math.random() - 0.5);
-    if (totalQ > props.total) {
-        return <End totalQ={totalQ-1} correctAnswer={correctAnswer} alp={props.alphabet} f={props.f}/>
-    }
 
     const result = (obj) => {
         currentHiragana.value === obj
-            ? (setHiraganaArr(
-                hiraganaArr.filter((item) => item.value !== obj)
-            ),
-                setCurrentHiragana(
-                    hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]
-                ),
+            ? (
+                setAnswers([...answers,  { 'word': getWord(), 'check': 1 }]),
+                setHiraganaArr(hiraganaArr.filter((item) => item.value !== obj)),
+                setCurrentHiragana(hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]),
                 setCorrectAnswer(correctAnswer + 1),
-                setTotalQ(totalQ + 1))
-            : (setWrongAnswer(wrongAnswer + 1),
-                setCurrentHiragana(
-                    hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]
-                ), setTotalQ(totalQ + 1))
+                setTotalQ(totalQ + 1)
+            )
+
+            :
+            (
+                setAnswers([...answers, { 'word': getWord(), 'check': 0 }]),
+                setCurrentHiragana(hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]),
+                setWrongAnswer(wrongAnswer + 1),
+                setTotalQ(totalQ + 1)
+            )
     }
+
+    console.log(answers)
+    const getWord = () => {
+        let random = Math.random()
+        if (props.alphabet == 'Mix') {
+            if (random > 0.5) {
+                return currentHiragana.hiragana
+            } else {
+                return currentHiragana.katakana
+            }
+        }
+        return currentHiragana[props.alphabet.toLowerCase()]
+    }
+
+    if (totalQ > props.total) {
+        return <End totalQ={totalQ - 1} correctAnswer={correctAnswer} alp={props.alphabet} f={props.f} answers={answers} />
+    }
+
     return (
         <>
             <div className={styles.container}>
@@ -98,7 +119,7 @@ function Question(props) {
                     <div className={styles.header}>
                         <h2>{props.alphabet.toUpperCase()}</h2>
                         <h3>{totalQ} of {props.total}</h3>
-                        <div className={styles.question}>{currentHiragana[props.alphabet.toLowerCase()]}</div>
+                        <div className={styles.question}>{getWord()}</div>
                     </div>
                 </div>
                 <ul className={styles.answerWindow}>
