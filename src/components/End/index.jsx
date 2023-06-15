@@ -2,10 +2,6 @@ import styles from './End.module.scss'
 
 function End(props) {
     let arr = props.answers
-    console.log('2')
-    console.log(arr)
-    console.log('3')
-    console.log(arr[2].word)
     return (
         <div className={styles.container}>
             <div className={styles.header}>

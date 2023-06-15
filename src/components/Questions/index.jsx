@@ -94,8 +94,6 @@ function Question(props) {
                 setTotalQ(totalQ + 1)
             )
     }
-
-    console.log(answers)
     const getWord = () => {
         let random = Math.random()
         if (props.alphabet == 'Mix') {
