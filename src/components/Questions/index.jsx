@@ -112,9 +112,6 @@ function Question(props) {
     if (totalQ > props.total) {
         return <End totalQ={totalQ - 1} correctAnswer={correctAnswer} alp={props.alphabet} f={props.f} answers={answers} />
     }
-    
-console.log(word)
-
     return (
         <>
             <div className={styles.container}>
